@@ -16,7 +16,7 @@ function Kavo:DraggingEnabled(frame, parent)
     local dragInput, mousePos, framePos
 
     frame.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
             dragging = true
             mousePos = input.Position
             framePos = parent.Position
@@ -30,7 +30,7 @@ function Kavo:DraggingEnabled(frame, parent)
     end)
 
     frame.InputChanged:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        if input.UserInputType == Enum.UserInputType.MouseMovement then
             dragInput = input
         end
     end)
@@ -99,11 +99,11 @@ local themeStyles = {
         ElementColor = Color3.fromRGB(52, 74, 95)
     },
     Sentinel = {
-        SchemeColor = Color3.fromRGB(230, 35, 69),
+        SchemeColor = Color3.fromRGB(12, 12, 12),
         Background = Color3.fromRGB(32, 32, 32),
-        Header = Color3.fromRGB(24, 24, 24),
-        TextColor = Color3.fromRGB(119, 209, 138),
-        ElementColor = Color3.fromRGB(24, 24, 24)
+        Header = Color3.fromRGB(25, 25, 25),
+        TextColor = Color3.fromRGB(255, 255, 255),
+        ElementColor = Color3.fromRGB(25, 25, 25)
     },
     Synapse = {
         SchemeColor = Color3.fromRGB(46, 48, 43),
@@ -145,14 +145,6 @@ function Kavo:ToggleUI()
     else
         game.CoreGui[LibName].Enabled = true
     end
-end
-
-function Kavo:DestroyUI()
-	if game.CoreGui:FindFirstChild(LibName) then
-		game.CoreGui[LibName]:Destroy()
-	else
-		print("Strange Error Occured")
-	end
 end
 
 function Kavo.CreateLib(kavName, themeList)
@@ -298,7 +290,7 @@ function Kavo.CreateLib(kavName, themeList)
         wait(1)
         ScreenGui:Destroy()
     end)
-	
+
     MainSide.Name = "MainSide"
     MainSide.Parent = Main
     MainSide.BackgroundColor3 = themeList.Header
